@@ -21,8 +21,8 @@ public class Game {
 		ArrayList<Enemy> enemies = new ArrayList<>();
 		
 		enemies.add(new Enemy("Goblin", 1,1,10,15,25));
-		enemies.add(new Enemy("Goblin;12;5;16;16;20"));
-		enemies.add(new Enemy("Goblin;1;1;16;16;4"));
+		enemies.add(new MeleeEnemy("Goblin;12;5;16x16;20"));
+		enemies.add(new Boss("Goblin;1;1;16x16;4;boss"));
 
 		Game game = new Game(newPlayer, enemies, new ArrayList<>());
 		game.resolveCollsions();
@@ -31,17 +31,14 @@ public class Game {
 		
 	}
 	
-	private boolean checkCollision(Player p, Enemy e)
-	{
-		return (p.getX() == e.getX() && p.getY() == e.getY());
+	private boolean checkCollision(Player p, Enemy e) { return GameObject.intersects(e, p); }
 
 	}
 	private void decreaseHealth(Player p, Enemy e)
 	{
 		int startHealth = p.getHealth();
-		int newHealth = p.getHealth() - e.getHealth();
-		
-		p.setHealth(newHealth >= 0 ? newHealth : 0);
+		int newHealth = p.getHealth() - (e.getDamage() *( e instanceof Boss ? 2 : 1));
+]		p.setHealth(newHealth >= 0 ? newHealth : 0);
 		eventLog.add("Hit:Player by " + e.getType() + " for " +  e.getDamage() + " -> HP " + startHealth + "->" + p.getHealth());
 		
 	}
@@ -58,7 +55,7 @@ public class Game {
 		
 		for (Enemy e: enemies)
 		{
-			if(e.getType() == query)
+			if(e.getType().contains(query))
 				findedEnemies.add(e);
 			
 		}

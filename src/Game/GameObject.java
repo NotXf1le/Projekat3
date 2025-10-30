@@ -29,7 +29,7 @@ public class GameObject {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-	public boolean intersects(GameObject first, GameObject seconds)
+	public static boolean intersects(GameObject first, GameObject seconds)
 	{
 		return (first.getX() == seconds.getX() && first.getY() == seconds.getY());
 

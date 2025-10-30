@@ -40,7 +40,7 @@ public class Enemy extends GameObject{
 	public int getHealth() { return health; }
 	public void setHealth(int health) { this.health = Math.min(100, Math.max(0, health)); }
 				
-	public int getDamage() { return damage; }	
+	public int getDamage() { return damage; }
 	public void setDamage(int damage) { this.damage = Math.min(100, Math.max(0, damage));}
 	
 	
@@ -49,3 +49,4 @@ public class Enemy extends GameObject{
 				getType(), getX(), getY(), getWidth(), getHeight(), getDamage());
 	}
 }
+
