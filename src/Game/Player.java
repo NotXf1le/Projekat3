@@ -1,21 +1,17 @@
 package Game;
 
-public class Player {
+public class Player extends GameObject {
     private String name;
-    private int x;
-    private int y;
-    private int width;
-    private int height;
     private int health;
 
    
     public Player(String name, int x, int y, int width, int height, int health) {
-        this.name = formatName(name);
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.health = fixHealth(health);
+    	setName(name);
+        setX(x);
+        setY(y);
+        setWidth(width);
+        setHeight(height);
+        setHealth(health);
     }
 
    
@@ -28,51 +24,23 @@ public class Player {
         this(name, x, y, 50, 50, 100);
     }
 
-  
-    private String formatName(String name) {
+    private String setName(String name) {
         if (name == null || name.trim().isEmpty()) {
             return "Unknown";
         }
         name = name.trim();
-        return name.substring(0, 1).toUpperCase() + name.substring(1);
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        
     }
 
-    
-    private int fixHealth(int health) {
-        if (health < 0) return 0;
-        if (health > 100) return 100;
-        return health;
-    }
-
-
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     @Override
     public String toString() {
-        return "Player{name='" + name + "', x=" + x + ", y=" + y +
-               ", width=" + width + ", height=" + height + ", health=" + health + "}";
+        return "Player{name='" + name + "', x=" + getX() + ", y=" + getY() +
+               ", width=" + getWidth() + ", height=" + getHeight() + ", health=" + health + "}";
     }
     
-    public int getX()
-    {
-    	return x;
-    	
-    }
-    public int getY()
-    {
-    	return y;
-    	
-    }
-    public int getHealth()
-    {
-    	return health;
-    	
-    }
-    public void setHealth(int health)
-    {
-    	this.health = health;
-    	
-    }
+    public int getHealth() { return health; }
+    public void setHealth(int health) { this.health = Math.min(100, Math.max(0,health));}
 }
