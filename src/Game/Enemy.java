@@ -7,7 +7,7 @@ public class Enemy extends GameObject{
 	
 	public Enemy(String type, int x, int y, int width, int heigth, int damage) {
 		setType(type.trim());
-        setDamage( Integer.parseInt(parts[4]));
+        setDamage(damage);
 
 				
 	}
@@ -16,11 +16,11 @@ public class Enemy extends GameObject{
         String[] parts = pars.split(";");
 		
         setType(parts[0]);
-        setX(parts[1]);
-        setY(parts[2]);
+        setX(Integer.parseInt(parts[1]));
+        setY(Integer.parseInt(parts[2]));
         String[] sizeParts = parts[3].split("x");
-        setWidth(sizeParts[0]);
-        setHeight(sizeParts[1]);
+        setWidth(Integer.parseInt(sizeParts[0]));
+        setHeight(Integer.parseInt(sizeParts[1]));
         setDamage( Integer.parseInt(parts[4]));
         
 	}
@@ -46,6 +46,6 @@ public class Enemy extends GameObject{
 	
 	public String toString() {
 		return String.format("Enemy(%s) @ (%d %d) %dx%d DMG=%d",
-				getType(), getX(), getY(), getWidth(), getHeigth(), getDamage());
+				getType(), getX(), getY(), getWidth(), getHeight(), getDamage());
 	}
 }
