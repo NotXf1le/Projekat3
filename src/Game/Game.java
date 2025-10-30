@@ -27,18 +27,21 @@ public class Game {
 		Game game = new Game(newPlayer, enemies, new ArrayList<>());
 		game.resolveCollsions();
 		game.printEventLog();
-		
-		
+		for(Enemy e : findByType("gob", enemies))
+		{
+			System.out.println(e);
+			
+		}
 	}
 	
 	private boolean checkCollision(Player p, Enemy e) { return GameObject.intersects(e, p); }
 
-	}
+	
 	private void decreaseHealth(Player p, Enemy e)
 	{
 		int startHealth = p.getHealth();
 		int newHealth = p.getHealth() - (e.getDamage() *( e instanceof Boss ? 2 : 1));
-]		p.setHealth(newHealth >= 0 ? newHealth : 0);
+		p.setHealth(newHealth >= 0 ? newHealth : 0);
 		eventLog.add("Hit:Player by " + e.getType() + " for " +  e.getDamage() + " -> HP " + startHealth + "->" + p.getHealth());
 		
 	}
@@ -48,14 +51,14 @@ public class Game {
 		eventLog.add("New enemy: " + e.getType());
 		
 	}
-	private ArrayList<Enemy> findByType(String query)
+	private static ArrayList<Enemy> findByType(String query, ArrayList<Enemy> enemies)
 	{
 		ArrayList<Enemy> findedEnemies = new ArrayList<>();
 		query = query.toLowerCase();
 		
 		for (Enemy e: enemies)
 		{
-			if(e.getType().contains(query))
+			if(e.getType().toLowerCase().contains(query))
 				findedEnemies.add(e);
 			
 		}
