@@ -1,6 +1,4 @@
-package game;
-
-import java.util.ArrayList;
+package Game;
 
 public class GameObject {
 	private int x;
@@ -31,52 +29,9 @@ public class GameObject {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-	private boolean checkCollision(Player p, Enemy e)
+	public boolean intersects(GameObject first, GameObject seconds)
 	{
-		return (p.getX() == e.getX() && p.getY() == e.getY());
+		return (first.getX() == seconds.getX() && first.getY() == seconds.getY());
 
 	}
-	private void decreaseHealth(Player p, Enemy e)
-	{
-		int startHealth = p.getHealth();
-		int newHealth = p.getHealth() - e.getHealth();
-		
-		p.setHealth(newHealth >= 0 ? newHealth : 0);
-		
-	}
-	private void addEnemy(Enemy e)
-	{
-	Enemy.add(e);
-		
-		
-	}
-	private ArrayList<Enemy> findByType(String query)
-	{
-		ArrayList<Enemy> findedEnemies = new ArrayList<>();
-		query = query.toLowerCase();
-		
-		for (Enemy e: Enemy)
-		{
-			if(e.getType() == query)
-				findedEnemies.add(e);
-			
-		}
-		
-		return findedEnemies;
-			
-	}
-	private ArrayList<Enemy> collidingWithPlayer()
-	{
-		ArrayList<Enemy> findedEnemies = new ArrayList<>();
-
-		for (Enemy e: enemies)
-		{
-			if(checkCollision(player, e))
-				findedEnemies.add(e);
-
-			
-		}
-		return findedEnemies;
-	}
-
 }

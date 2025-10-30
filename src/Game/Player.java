@@ -24,13 +24,18 @@ public class Player extends GameObject {
         this(name, x, y, 50, 50, 100);
     }
 
-    private String setName(String name) {
+    private void setName(String name) {
         if (name == null || name.trim().isEmpty()) {
-            return "Unknown";
+        	name = "Unknown";
+        	
         }
-        name = name.trim();
-        name = name.substring(0, 1).toUpperCase() + name.substring(1);
-        
+        else
+        {
+            name = name.trim();
+            name = name.substring(0, 1).toUpperCase() + name.substring(1);
+            
+        }
+
     }
 
     public String getName() { return name; }
